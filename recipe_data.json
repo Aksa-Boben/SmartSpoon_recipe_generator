@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Tomato Pasta",
+    "ingredients": ["tomato", "pasta", "olive oil", "garlic"],
+    "instructions": "Boil pasta. Cook tomatoes with garlic and olive oil. Mix and serve."
+  },
+  {
+    "title": "Banana Smoothie",
+    "ingredients": ["banana", "milk", "honey"],
+    "instructions": "Blend banana with milk and honey. Serve chilled."
+  },
+  {
+    "title": "Potato Curry",
+    "ingredients": ["potato", "onion", "turmeric", "salt", "chili powder"],
+    "instructions": "Boil potatoes. Fry onions with turmeric and spices. Mix and cook well."
+  },
+  {
+    "title": "Kerala Fish Curry",
+    "ingredients": ["fish", "coconut milk", "tamarind", "turmeric", "chili powder", "garlic", "onion"],
+    "instructions": "Cook fish in coconut milk with spices and tamarind. Simmer until cooked."
+  },
+  {
+    "title": "Appam with Stew",
+    "ingredients": ["rice flour", "yeast", "coconut milk", "vegetables", "onion", "pepper", "salt"],
+    "instructions": "Ferment rice flour. Make appam. Cook vegetables in coconut milk for stew."
+  },
+  {
+    "title": "Puttu and Kadala Curry",
+    "ingredients": ["rice flour", "grated coconut", "black chickpeas", "onion", "garlic", "spices"],
+    "instructions": "Steam rice flour and coconut to make puttu. Cook chickpeas in spicy gravy."
+  },
+  {
+    "title": "Masala Dosa",
+    "ingredients": ["rice", "urad dal", "potato", "onion", "turmeric", "mustard seeds"],
+    "instructions": "Make dosa batter. Prepare potato masala. Fill dosa with masala and serve."
+  },
+  {
+    "title": "Avial",
+    "ingredients": ["carrot", "beans", "yam", "coconut", "curd", "green chili", "curry leaves"],
+    "instructions": "Cook mixed vegetables. Add coconut paste and curd. Mix with curry leaves."
+  },
+  {
+    "title": "Egg Roast",
+    "ingredients": ["egg", "onion", "tomato", "garlic", "ginger", "chili powder", "garam masala"],
+    "instructions": "Boil eggs. Roast onion, tomato, and spices. Add eggs and cook in masala."
+  },
+  {
+    "title": "Chicken Biryani",
+    "ingredients": ["chicken", "basmati rice", "onion", "garlic", "ginger", "spices", "yogurt"],
+    "instructions": "Marinate chicken. Cook with spices. Layer with rice and cook on low flame."
+  },
+  {
+    "title": "Parippu Curry",
+    "ingredients": ["toor dal", "coconut", "green chili", "mustard seeds", "garlic", "curry leaves"],
+    "instructions": "Cook dal. Add coconut paste. Temper with spices and serve hot."
+  },
+  {
+    "title": "Sambar",
+    "ingredients": ["toor dal", "tamarind", "vegetables", "sambar powder", "mustard seeds", "curry leaves"],
+    "instructions": "Cook dal and vegetables. Add tamarind and spices. Temper and serve with rice."
+  }
+]

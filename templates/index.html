@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Smart Spoon - Recipe Generator</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap"
+  />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+</head>
+<body class="font-['Epilogue','Noto Sans',sans-serif] bg-[#fcf9f8] min-h-screen">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between border-b border-[#f3eae7] px-10 py-4">
+    <div class="flex items-center gap-4 text-[#1c110d]">
+      <svg class="w-6 h-6" viewBox="0 0 48 48" fill="currentColor">
+        <path d="M44 11.2727C44 14.0109 39.8386 16.3957 33.69 17.6364C39.8386 18.877 44 21.2618 44 24C44 26.7382 39.8386 29.123 33.69 30.3636C39.8386 31.6043 44 33.9891 44 36.7273C44 40.7439 35.0457 44 24 44C12.9543 44 4 40.7439 4 36.7273C4 33.9891 8.16144 31.6043 14.31 30.3636C8.16144 29.123 4 26.7382 4 24C4 21.2618 8.16144 18.877 14.31 17.6364C8.16144 16.3957 4 14.0109 4 11.2727C4 7.25611 12.9543 4 24 4C35.0457 4 44 7.25611 44 11.2727Z"/>
+      </svg>
+      <h1 class="text-xl font-bold">Smart Spoon</h1>
+    </div>
+  </header>
+
+  <!-- Hero Section (Heading only) -->
+  <!-- Hero Section (with background image and overlay) -->
+  <section class="relative text-center text-white py-20">
+    <!-- Background Image -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-80" style="background-image: url('/static/hero-bg.png'); z-index: -1;"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 px-4">
+      <h2 class="text-4xl md:text-5xl font-black leading-tight drop-shadow-md">
+        Create Delicious Recipes with What You Have
+      </h2>
+      <p class="text-base md:text-lg mt-2 drop-shadow-sm">
+        Enter your available ingredients and let Smart Spoon suggest the perfect dish for you.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- How It Works -->
+  <section class="px-4 md:px-40 py-12">
+    <h3 class="text-[22px] font-bold text-[#1c110d] mb-4">How It Works</h3>
+    <h2 class="text-3xl font-bold mb-4 text-[#1c110d]">Simple Steps to Culinary Delight</h2>
+    <p class="text-[#4a3b35] max-w-2xl mb-10">
+      Smart Spoon makes cooking easy and fun. Just follow these steps to create your next meal.
+    </p>
+    <div class="grid gap-6 md:grid-cols-3 mb-10">
+      <div class="border p-4 rounded-lg bg-[#fcf9f8]">
+        <h4 class="font-bold text-[#1c110d] mb-2">Enter Ingredients</h4>
+        <p class="text-[#9b5d4b] text-sm">List the ingredients you have on hand, such as vegetables, meats, or spices.</p>
+      </div>
+      <div class="border p-4 rounded-lg bg-[#fcf9f8]">
+        <h4 class="font-bold text-[#1c110d] mb-2">Generate Recipe</h4>
+        <p class="text-[#9b5d4b] text-sm">Click the 'Generate Recipe' button to receive a recipe tailored to your input.</p>
+      </div>
+      <div class="border p-4 rounded-lg bg-[#fcf9f8]">
+        <h4 class="font-bold text-[#1c110d] mb-2">Enjoy Your Meal</h4>
+        <p class="text-[#9b5d4b] text-sm">Follow the steps and enjoy a delicious meal made with your available ingredients.</p>
+      </div>
+    </div>
+
+    <!-- Input and Button NOW placed here -->
+    <div class="flex w-full max-w-xl mx-auto mt-6">
+      <input
+        id="ingredients"
+        type="text"
+        placeholder="Enter ingredients (e.g., tomato, rice, garlic)"
+        class="flex-grow px-4 py-3 text-sm md:text-base text-[#1c110d] bg-white rounded-l-xl border border-r-0 border-[#e8d5cf] focus:outline-none"
+      />
+      <button
+        onclick="generate()"
+        class="px-6 py-3 bg-[#f15a2c] text-white font-semibold rounded-r-xl hover:bg-[#d84e20] transition"
+      >
+        Generate Recipe
+      </button>
+    </div>
+  </section>
+
+  <!-- Recipe Output -->
+  <section id="output" class="px-4 md:px-40 py-10"></section>
+
+  <!-- JS remains the same -->
+  <script>
+  async function generate() {
+    const input = document.getElementById('ingredients').value;
+    const response = await fetch('/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ingredients: input })
+    });
+
+    const data = await response.json();
+    const output = document.getElementById('output');
+    output.innerHTML = '';
+
+    if (data.recipes && data.recipes.length > 0) {
+      data.recipes.forEach(recipe => {
+        const card = document.createElement('div');
+        card.className = 'bg-white shadow-md rounded-xl p-6 mb-6';
+
+        const isAI = recipe.title.includes("AI-Generated");
+
+        // Header
+        let headerHTML = `
+          <h3 class="text-xl font-bold text-[#1c110d] mb-2">🍽 ${recipe.title}</h3>
+          <p class="text-[#4a3b35] mb-2"><strong>Ingredients:</strong> ${recipe.ingredients.join(', ')}</p>
+        `;
+
+        // Handle AI-generated formatting
+        let instructionsHTML = recipe.instructions;
+        if (isAI) {
+          const lines = instructionsHTML
+            .replace(/\*\*/g, '') // Remove markdown bold
+            .split(/\n+/)
+            .map(l => l.trim())
+            .filter(l => l.length > 0);
+
+          // Try to extract sections: intro, title, ingredients, steps, tips
+          const introIndex = lines.findIndex(line => line.toLowerCase().startsWith("title:"));
+          const ingredientsIndex = lines.findIndex(line => line.toLowerCase().startsWith("ingredients:"));
+          const instructionsIndex = lines.findIndex(line => line.toLowerCase().startsWith("instructions:"));
+          const tipsIndex = lines.findIndex(line => line.toLowerCase().startsWith("tips"));
+
+          const introText = lines.slice(0, introIndex > 0 ? introIndex : ingredientsIndex).join(' ');
+          const titleLine = introIndex !== -1 ? lines[introIndex].replace(/title:/i, '').trim() : '';
+          const ingredientsList = ingredientsIndex !== -1 && instructionsIndex !== -1
+            ? lines.slice(ingredientsIndex + 1, instructionsIndex)
+            : [];
+          const stepsList = instructionsIndex !== -1
+            ? lines.slice(instructionsIndex + 1, tipsIndex > 0 ? tipsIndex : lines.length)
+            : [];
+          const tipsList = tipsIndex !== -1 ? lines.slice(tipsIndex + 1) : [];
+
+          instructionsHTML = `
+            ${introText ? `<p class="text-[#4a3b35] mb-4">${introText}</p>` : ''}
+            ${titleLine ? `<p class="text-[#4a3b35] font-semibold mb-2"><strong>Recipe Title:</strong> ${titleLine}</p>` : ''}
+            ${ingredientsList.length > 0 ? `
+              <p class="text-[#4a3b35] font-semibold mt-4 mb-1">Ingredients:</p>
+              <ul class="list-disc list-inside text-[#4a3b35] mb-2">
+                ${ingredientsList.map(i => `<li>${i.replace(/^\*+\s*/, '')}</li>`).join('')}
+              </ul>` : ''}
+            ${stepsList.length > 0 ? `
+              <p class="text-[#4a3b35] font-semibold mt-4 mb-1">Instructions:</p>
+              <ol class="list-decimal list-inside text-[#4a3b35] space-y-1">
+                ${stepsList.map(s => `<li>${s.replace(/^\d+\.\s*/, '')}</li>`).join('')}
+              </ol>` : ''}
+            ${tipsList.length > 0 ? `
+              <p class="text-[#4a3b35] font-semibold mt-4 mb-1">Tips & Variations:</p>
+              <ul class="list-disc list-inside text-[#4a3b35]">
+                ${tipsList.map(t => `<li>${t.replace(/^\*+\s*/, '')}</li>`).join('')}
+              </ul>` : ''}
+          `;
+        } else {
+          // Normal formatting (non-AI)
+          instructionsHTML = `
+            <p class="text-[#4a3b35] font-semibold mt-4">Instructions:</p>
+            <p class="text-[#4a3b35] mt-2">${recipe.instructions}</p>
+          `;
+        }
+
+        card.innerHTML = headerHTML + instructionsHTML;
+        output.appendChild(card);
+      });
+    } else {
+      output.innerHTML = '<p class="text-red-600 font-medium">❌ No recipes found.</p>';
+    }
+  }
+</script>
+</body>
+
+</html>
