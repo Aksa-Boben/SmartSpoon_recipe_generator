@@ -5,6 +5,29 @@ It uses Retrieval-Augmented Generation (RAG) to either find matching recipes or 
 
 ---
 
+## 👥 Team Members
+
+- Adith Kurian Pulimalayil  
+- Ahil Baby  
+- Aksa Boben  
+- Jacob Joji  
+- Niveditha Shaji
+
+---
+
+## 📚 Table of Contents
+
+- [Features](#features)
+- [Folder Structure](#folder-structure)
+- [How It Works](#how-it-works)
+- [Technologies Used](#technologies-used)
+- [Environment Variables](#environment-variables)
+- [Run the App](#run-the-app)
+- [Credits](#credits)
+- [Acknowledgments](#acknowledgments)
+
+---
+
 ## Features
 
 -  Search real recipes using FAISS and embeddings
@@ -58,3 +81,30 @@ Create a `.env` file in the project root:
 
 ```env
 GROQ_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxx
+```
+---
+
+## Run the App
+1. Install dependencies:
+```bash
+  pip install -r requirements.txt
+```
+2. Start the FastAPI server:
+```bash
+  uvicorn main:app --reload
+```
+3. Open your browser:
+```bash
+  http://localhost:8000
+```
+---
+
+## Credits
+- Developed during the GenAI Add-On Course by iSkew Learning
+- Recipe embeddings powered by sentence-transformers
+- Recipe generation by Groq's LLaMA3
+
+---
+
+## Acknowledgments
+Thanks to my mentors, peers, and my college for encouraging this project.
